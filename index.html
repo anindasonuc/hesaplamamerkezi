@@ -1,0 +1,184 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hesaplama Merkezi</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f4f4;
+}
+
+header{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.box{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:8px 0 15px;
+    box-sizing:border-box;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.result{
+    margin-top:10px;
+    padding:10px;
+    background:#eef6ff;
+    border-radius:6px;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Hesaplama Merkezi</h1>
+<p>Fazla Mesai - Yakıt - Kıdem Tazminatı</p>
+</header>
+
+<div class="container">
+
+<!-- FAZLA MESAİ -->
+<div class="box">
+<h2>Fazla Mesai Hesaplama</h2>
+
+<label>Aylık Maaş (TL)</label>
+<input type="number" id="maas">
+
+<label>Fazla Mesai Saati</label>
+<input type="number" id="mesai">
+
+<button onclick="hesaplaMesai()">Hesapla</button>
+
+<div class="result" id="mesaiSonuc"></div>
+</div>
+
+<!-- YAKIT -->
+<div class="box">
+<h2>Yakıt Maliyeti</h2>
+
+<label>Yakıta Harcanan Tutar (TL)</label>
+<input type="number" id="yakit">
+
+<label>Gidilen KM</label>
+<input type="number" id="km">
+
+<button onclick="hesaplaYakit()">Hesapla</button>
+
+<div class="result" id="yakitSonuc"></div>
+</div>
+
+<!-- KIDEM -->
+<div class="box">
+<h2>Kıdem Tazminatı</h2>
+
+<label>Aylık Maaş (TL)</label>
+<input type="number" id="kidemMaas">
+
+<label>Çalışma Süresi (Yıl)</label>
+<input type="number" id="kidemYil">
+
+<button onclick="hesaplaKidem()">Hesapla</button>
+
+<div class="result" id="kidemSonuc"></div>
+</div>
+
+</div>
+
+<footer>
+© 2026 Hesaplama Merkezi
+</footer>
+
+<script>
+
+// FAZLA MESAİ
+function hesaplaMesai(){
+
+let maas = Number(document.getElementById("maas").value);
+let mesai = Number(document.getElementById("mesai").value);
+
+let gunluk = maas / 30;
+let saatlik = gunluk / 7.5;
+let fazla = saatlik * 1.5 * mesai;
+
+document.getElementById("mesaiSonuc").innerHTML =
+"Günlük: " + gunluk.toFixed(2) + " TL<br>" +
+"Saatlik: " + saatlik.toFixed(2) + " TL<br>" +
+"Fazla Mesai: " + fazla.toFixed(2) + " TL";
+}
+
+// YAKIT
+function hesaplaYakit(){
+
+let yakit = Number(document.getElementById("yakit").value);
+let km = Number(document.getElementById("km").value);
+
+if(km <= 0){
+document.getElementById("yakitSonuc").innerHTML = "Geçerli KM girin";
+return;
+}
+
+let kmBasi = yakit / km;
+
+document.getElementById("yakitSonuc").innerHTML =
+"KM Başına Maliyet: " + kmBasi.toFixed(2) + " TL";
+}
+
+// KIDEM
+function hesaplaKidem(){
+
+let maas = Number(document.getElementById("kidemMaas").value);
+let yil = Number(document.getElementById("kidemYil").value);
+
+let kidem = (maas / 30) * 30 * yil;
+
+document.getElementById("kidemSonuc").innerHTML =
+"Kıdem Tazminatı: " + kidem.toFixed(2) + " TL";
+}
+
+</script>
+
+</body>
+</html>
+```
