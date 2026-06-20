@@ -117,6 +117,7 @@ footer{
 <div class="result" id="yakitSonuc"></div>
 </div>
 
+   
 <!-- KIDEM -->
 <div class="card">
 <h2>Kıdem Tazminatı</h2>
@@ -128,6 +129,83 @@ footer{
 
 <div class="result" id="kidemSonuc"></div>
 </div>
+    <div style="
+    max-width: 350px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-family: Arial;
+    background: #ffffff;
+">
+
+    <h2 style="text-align:center; margin-bottom:15px;">
+        Boy – Kilo Endeksi
+    </h2>
+
+    <label>Boy (cm)</label>
+    <input type="number" id="boy" placeholder="Örn: 175" style="
+        width:100%;
+        padding:10px;
+        margin:5px 0 15px 0;
+        border-radius:8px;
+        border:1px solid #ccc;
+    ">
+
+    <label>Kilo (kg)</label>
+    <input type="number" id="kilo" placeholder="Örn: 70" style="
+        width:100%;
+        padding:10px;
+        margin:5px 0 15px 0;
+        border-radius:8px;
+        border:1px solid #ccc;
+    ">
+
+    <button onclick="hesaplaBMI()" style="
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:8px;
+        background:#4CAF50;
+        color:white;
+        font-size:16px;
+        cursor:pointer;
+    ">
+        Hesapla
+    </button>
+
+    <h3 id="sonuc" style="text-align:center; margin-top:15px;"></h3>
+</div>
+
+<script>
+function hesaplaBMI() {
+    let boy = document.getElementById("boy").value;
+    let kilo = document.getElementById("kilo").value;
+
+    if (!boy || !kilo) {
+        document.getElementById("sonuc").innerText = "Lütfen tüm alanları doldurun!";
+        return;
+    }
+
+    let mBoy = boy / 100;
+    let bmi = kilo / (mBoy * mBoy);
+
+    let durum = "";
+
+    if (bmi < 18.5) {
+        durum = "Zayıf";
+    } else if (bmi < 25) {
+        durum = "Normal";
+    } else if (bmi < 30) {
+        durum = "Fazla kilolu";
+    } else {
+        durum = "Obez";
+    }
+
+    document.getElementById("sonuc").innerText =
+        "BMI: " + bmi.toFixed(2) + " - " + durum;
+}
+</script>
 
 </div>
 
@@ -171,48 +249,6 @@ document.getElementById("kidemSonuc").innerHTML=
 "Kıdem: "+sonuc.toFixed(2)+" TL";
 }
 
-</script>
-    <h2>Boy – Kilo Endeksi (BMI) Hesaplama</h2>
-
-<label>Boy (cm):</label><br>
-<input type="number" id="boy" placeholder="Örn: 175"><br><br>
-
-<label>Kilo (kg):</label><br>
-<input type="number" id="kilo" placeholder="Örn: 70"><br><br>
-
-<button onclick="hesaplaBMI()">Hesapla</button>
-
-<h3 id="sonuc"></h3>
-
-<script>
-function hesaplaBMI() {
-    let boy = document.getElementById("boy").value;
-    let kilo = document.getElementById("kilo").value;
-
-    if (!boy || !kilo) {
-        document.getElementById("sonuc").innerText = "Lütfen boy ve kilo giriniz!";
-        return;
-    }
-
-    let mBoy = boy / 100;
-    let bmi = kilo / (mBoy * mBoy);
-
-    let durum = "";
-
-    if (bmi < 18.5) {
-        durum = "Zayıf";
-    } else if (bmi < 25) {
-        durum = "Normal";
-    } else if (bmi < 30) {
-        durum = "Fazla kilolu";
-    } else {
-        durum = "Obez";
-    }
-
-    document.getElementById("sonuc").innerText =
-        "BMI: " + bmi.toFixed(2) + " - " + durum;
-}
-</script>
 <body>
 
 <h1>Hesaplama Merkezi</h1>
