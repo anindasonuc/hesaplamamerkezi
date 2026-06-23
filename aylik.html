@@ -155,7 +155,7 @@ Net maaş, izin günleri ve fazla mesai saatlerine göre otomatik hesaplama
 
 <button onclick="hesapla()">HESAPLA</button>
 
-<div id="sonuc"></div>
+<div id="sonuc1"></div>
 
 </div>
     <div class="card maas-card">
@@ -203,7 +203,7 @@ Tüm saatler iş yerinde geçirilen toplam süredir (yemek molası dahil). Siste
 
 <button onclick="hesaplaMaas()">🧮 Hesapla</button>
 
-<div id="sonuc" class="result-card"></div>
+<div id="sonuc2" class="result-card"></div>
 
 </div>
 
@@ -317,7 +317,7 @@ let ucret = toplam * saatlik * 1.5;
 
 let toplamKazanc = maas + ucret;
 
-document.getElementById("sonuc").innerHTML = `
+document.getElementById("sonuc2").innerHTML = `
 <div class="result-item"><span>🔥 Hafta İçi Mesai</span><span>${haftaIciMesai.toFixed(2)}</span></div>
 <div class="result-item"><span>☀️ Pazar Mesai</span><span>${pazarMesai.toFixed(2)}</span></div>
 <div class="result-item"><span>🏢 Cumartesi Mesai</span><span>${cumartesiMesai.toFixed(2)}</span></div>
@@ -358,7 +358,7 @@ let izinKesintisi = kalanIzinSaati * saatlikUcret;
 
 let toplamMaas = maas + fazlaMesaiTutari - izinKesintisi;
 
-document.getElementById("sonuc").innerHTML = `
+document.getElementById("sonuc1").innerHTML = `
 <b>Net Maaş:</b> ${maas.toLocaleString('tr-TR')} TL<br>
 <b>Günlük Ücret:</b> ${gunlukUcret.toFixed(2)} TL<br>
 <b>Saatlik Ücret:</b> ${saatlikUcret.toFixed(2)} TL<br><br>
