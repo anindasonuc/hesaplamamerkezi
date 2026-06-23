@@ -16,13 +16,38 @@ body{
     background:#f3f4f6;
 }
 
-header{
-    background:#111827;
+/* 🔵 ÜST ALAN (GÜNCELLENDİ) */
+.mavi-alan{
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
     color:white;
     text-align:center;
-    padding:25px;
+    padding:60px 20px;
 }
 
+.header-icerik{
+    max-width:700px;
+    margin:auto;
+}
+
+.maas-btn{
+    display:inline-block;
+    margin-top:15px;
+    padding:14px 26px;
+    background:white;
+    color:#0d6efd;
+    font-weight:bold;
+    text-decoration:none;
+    border-radius:10px;
+    transition:0.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.maas-btn:hover{
+    transform:translateY(-3px);
+    background:#e9f2ff;
+}
+
+/* 📦 ANA KISIM */
 .container{
     max-width:900px;
     margin:auto;
@@ -63,20 +88,61 @@ button:hover{
     background:#eef2ff;
     border-radius:6px;
 }
+
+/* 📄 SEO ALANI */
+.seo-card {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.seo-card h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.seo-card h2 {
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.seo-card p {
+    line-height: 1.6;
+    font-size: 14px;
+    color: #333;
+}
+
+.seo-card ul {
+    padding-left: 20px;
+}
+
+.seo-card li {
+    margin-bottom: 5px;
+}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>Ücretsiz Maaş • Mesai • Yakıt • BMI Hesaplama Aracı</h1>
-<p>Fazla mesai - Kıdem - Yakıt - BMI - Kg Hesaplama</p>
+<!-- 🔵 ÜST ALAN -->
+<header class="mavi-alan">
+    <div class="header-icerik">
+        <h1>Hesaplama Merkezi Aktif</h1>
+        <p>Fazla mesai • Maaş • Yakıt • BMI hesaplama araçları</p>
+
+        <a href="#maas" class="maas-btn">
+            Aylık Maaş Hesapla
+        </a>
+    </div>
 </header>
 
 <div class="container">
 
 <!-- FAZLA MESAİ -->
-<div class="card">
+<div class="card" id="maas">
 <h2>Fazla Mesai Hesaplama</h2>
 
 <input id="maas" type="number" placeholder="Aylık maaş">
@@ -137,6 +203,7 @@ button:hover{
 
 </div>
 
+<!-- JS -->
 <script>
 
 // FAZLA MESAİ
@@ -207,42 +274,8 @@ document.getElementById("kgSonuc").innerHTML=
 }
 
 </script>
-<style>
-  .seo-card {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
-  }
 
-  .seo-card h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-
-  .seo-card h2 {
-    font-size: 18px;
-    margin-top: 15px;
-  }
-
-  .seo-card p {
-    line-height: 1.6;
-    font-size: 14px;
-    color: #333;
-  }
-
-  .seo-card ul {
-    padding-left: 20px;
-  }
-
-  .seo-card li {
-    margin-bottom: 5px;
-  }
-</style>
-
+<!-- SEO ALANI -->
 <div class="seo-card">
 
   <h1>Hesaplama Merkezi</h1>
@@ -268,6 +301,6 @@ document.getElementById("kgSonuc").innerHTML=
   </ul>
 
 </div>
+
 </body>
-    
 </html>
