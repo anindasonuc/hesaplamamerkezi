@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aylık Maaş Hesaplama</title>
+<title>Hesaplama Merkezi</title>
 
 <style>
 body{
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    background: linear-gradient(135deg,#ece9e6,#ffffff);
     margin:0;
     padding:20px;
 }
 
-/* ANA KUTU */
+/* KART */
 .kutu{
     max-width:650px;
     margin:auto;
@@ -21,41 +21,20 @@ body{
     padding:30px;
     border-radius:18px;
     box-shadow:0 10px 30px rgba(0,0,0,0.12);
-}
-
-/* DUYURU */
-.duyuru{
-    background: linear-gradient(135deg, #fff3cd, #ffe8a1);
-    border-left: 6px solid #ff9800;
-    padding:15px 18px;
-    border-radius:12px;
     margin-bottom:20px;
-    color:#5a4b00;
-    font-size:14px;
-    line-height:1.6;
 }
 
 /* BAŞLIK */
 h1{
     text-align:center;
     color:#2c3e50;
-    margin-bottom:5px;
 }
 
-/* AÇIKLAMA */
 .aciklama{
     text-align:center;
     color:#7f8c8d;
     font-size:14px;
-    margin-bottom:20px;
-}
-
-/* LABEL */
-label{
-    display:block;
-    margin-top:15px;
-    font-weight:bold;
-    color:#34495e;
+    margin-bottom:15px;
 }
 
 /* INPUT */
@@ -65,119 +44,85 @@ input{
     margin-top:6px;
     border:1px solid #ddd;
     border-radius:10px;
-    font-size:14px;
-}
-
-input:focus{
-    outline:none;
-    border-color:#6d4c41;
-    box-shadow:0 0 6px rgba(109,76,65,0.2);
 }
 
 /* BUTON */
 button{
     width:100%;
-    margin-top:20px;
+    margin-top:15px;
     padding:15px;
     background:linear-gradient(135deg,#6d4c41,#8d6e63);
     color:white;
     border:none;
     border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
     font-weight:bold;
-}
-
-button:hover{
-    transform:scale(1.02);
+    cursor:pointer;
 }
 
 /* SONUÇ */
-#sonuc1{
-    margin-top:25px;
-    padding:18px;
+.sonuc{
+    margin-top:15px;
+    padding:15px;
     background:#f1f8e9;
     border-left:5px solid #6d4c41;
     border-radius:10px;
-    line-height:1.7;
-}
-
-#sonuc1 h2{
-    color:#2e7d32;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 1. KART -->
 <div class="kutu">
 
-<!-- 📢 DUYURU -->
-<div class="duyuru">
-<b>📢 Duyuru</b><br><br>
+<h1>💰 Maaş Hesaplama</h1>
 
-Hesaplama sistemi <b>7,5 saat günlük çalışma</b> üzerinden yapılır.<br><br>
+<div class="aciklama">Net maaş + izin + fazla mesai</div>
 
-İzinler ilk olarak <b>fazla mesainiz varsa oradan düşülür</b>.<br>
-Eğer fazla mesai, izin süresini karşılamazsa kalan tutar <b>maaştan düşülür</b>.
-</div>
+<label>Net Maaş</label>
+<input type="number" id="maas">
 
-<h1>💰 Aylık Maaş Hesaplama</h1>
+<label>İzin Günü</label>
+<input type="number" id="izin">
 
-<div class="aciklama">
-Net maaş, izin günleri ve fazla mesai saatlerine göre otomatik hesaplama
-</div>
-
-<label>Net Maaş (TL)</label>
-<input type="number" id="maas" placeholder="30000">
-
-<label>Kullanılan İzin (Gün)</label>
-<input type="number" id="izin" placeholder="0">
-
-<label>Fazla Mesai (Saat)</label>
-<input type="number" id="mesai" placeholder="0">
+<label>Fazla Mesai Saat</label>
+<input type="number" id="mesai">
 
 <button onclick="hesapla()">HESAPLA</button>
 
-<div id="sonuc1"></div>
+<div id="sonuc1" class="sonuc"></div>
 
 </div>
-    <div style="height:25px;"></div>
 
+<!-- 2. KART -->
 <div class="kutu">
 
 <h1>⏱️ Fazla Mesai Hesaplama</h1>
 
-<div class="aciklama">
-Aylık fazla mesainizi otomatik hesaplayın
-</div>
+<label>Çalışılan Gün</label>
+<input type="number" id="fmGun">
 
-<label>Ay İçinde Çalışılan Gün</label>
-<input type="number" id="fmGun" placeholder="26">
+<label>Cumartesi</label>
+<input type="number" id="fmCmt">
 
-<label>Çalışılan Cumartesi</label>
-<input type="number" id="fmCumartesi" placeholder="4">
+<label>Pazar</label>
+<input type="number" id="fmPaz">
 
-<label>Çalışılan Pazar</label>
-<input type="number" id="fmPazar" placeholder="4">
+<label>Günlük Saat</label>
+<input type="number" id="fmSaat">
 
-<label>Günlük Çalışma Saati</label>
-<input type="number" id="fmSaat" placeholder="12">
+<label>Devamsızlık</label>
+<input type="number" id="fmDev">
 
-<label>Hafta İçi Devamsızlık (Gün)</label>
-<input type="number" id="fmDevamsizlik" placeholder="0">
+<button onclick="fazlaMesaiHesapla()">HESAPLA</button>
 
-<div class="aciklama">
-<b>Not:</b> Mola otomatik düşülür. Sadece hafta içi devamsızlık günlerini giriniz.
-</div>
-
-<button onclick="fazlaMesaiHesapla()">FAZLA MESAİ HESAPLA</button>
-
-<div id="fmSonuc"></div>
+<div id="sonuc2" class="sonuc"></div>
 
 </div>
 
 <script>
+
+/* 1. KART - ESKİ HAL */
 function hesapla(){
 
 let maas = Number(document.getElementById("maas").value);
@@ -219,124 +164,35 @@ document.getElementById("sonuc1").innerHTML = `
 <hr>
 <h2>Toplam Maaş: ${toplamMaas.toFixed(2)} TL</h2>
 `;
-    function fazlaMesaiHesapla(){
+}
+
+
+/* 2. KART */
+function fazlaMesaiHesapla(){
 
 let gun = Number(document.getElementById("fmGun").value) || 0;
-let cumartesi = Number(document.getElementById("fmCumartesi").value) || 0;
-let pazar = Number(document.getElementById("fmPazar").value) || 0;
+let cmt = Number(document.getElementById("fmCmt").value) || 0;
+let paz = Number(document.getElementById("fmPaz").value) || 0;
 let saat = Number(document.getElementById("fmSaat").value) || 0;
-let dev = Number(document.getElementById("fmDevamsizlik").value) || 0;
+let dev = Number(document.getElementById("fmDev").value) || 0;
 
-// Otomatik mola
-let mola = 0;
+let netGun = gun - dev;
+if(netGun < 0) netGun = 0;
 
-if(saat > 7.5){
-    mola = 1;
-}else if(saat > 4){
-    mola = 0.5;
-}else{
-    mola = 0.25;
-}
-
+let mola = saat > 7.5 ? 1 : 0.5;
 let netSaat = saat - mola;
 
-// Devamsızlık düşülmüş çalışma günü
-let calisilanGun = gun - dev;
+let toplamSaat = netGun * netSaat;
+let normalSaat = netGun * 7.5;
 
-if(calisilanGun < 0){
-    calisilanGun = 0;
-}
-
-// Toplam çalışma saati
-let toplamSaat = calisilanGun * netSaat;
-
-// Normal çalışma (7,5 saat)
-let normalSaat = calisilanGun * 7.5;
-
-// Fazla mesai
 let fazlaMesai = toplamSaat - normalSaat;
+if(fazlaMesai < 0) fazlaMesai = 0;
 
-if(fazlaMesai < 0){
-    fazlaMesai = 0;
-}
-
-document.getElementById("fmSonuc").style.display = "block";
-
-document.getElementById("fmSonuc").innerHTML = `
-<b>📊 Hesaplama Sonucu</b><br><br>
-
-<b>Çalışılan Gün:</b> ${calisilanGun} Gün<br>
-<b>Çalışılan Cumartesi:</b> ${cumartesi} Gün<br>
-<b>Çalışılan Pazar:</b> ${pazar} Gün<br>
-<b>Otomatik Mola:</b> ${mola} Saat<br>
-<b>Net Günlük Çalışma:</b> ${netSaat.toFixed(2)} Saat<br>
-<b>Toplam Çalışma:</b> ${toplamSaat.toFixed(2)} Saat<br>
-<b>Normal Çalışma:</b> ${normalSaat.toFixed(2)} Saat<br>
-
-<hr>
-
-<h2>⏱️ Toplam Fazla Mesai: ${fazlaMesai.toFixed(2)} Saat</h2>
-`;
-}function fazlaMesaiHesapla(){
-
-let gun = Number(document.getElementById("fmGun").value) || 0;
-let cumartesi = Number(document.getElementById("fmCumartesi").value) || 0;
-let pazar = Number(document.getElementById("fmPazar").value) || 0;
-let saat = Number(document.getElementById("fmSaat").value) || 0;
-let dev = Number(document.getElementById("fmDevamsizlik").value) || 0;
-
-// Otomatik mola
-let mola = 0;
-
-if(saat > 7.5){
-    mola = 1;
-}else if(saat > 4){
-    mola = 0.5;
-}else{
-    mola = 0.25;
-}
-
-let netSaat = saat - mola;
-
-// Devamsızlık düşülmüş çalışma günü
-let calisilanGun = gun - dev;
-
-if(calisilanGun < 0){
-    calisilanGun = 0;
-}
-
-// Toplam çalışma saati
-let toplamSaat = calisilanGun * netSaat;
-
-// Normal çalışma (7,5 saat)
-let normalSaat = calisilanGun * 7.5;
-
-// Fazla mesai
-let fazlaMesai = toplamSaat - normalSaat;
-
-if(fazlaMesai < 0){
-    fazlaMesai = 0;
-}
-
-document.getElementById("fmSonuc").style.display = "block";
-
-document.getElementById("fmSonuc").innerHTML = `
-<b>📊 Hesaplama Sonucu</b><br><br>
-
-<b>Çalışılan Gün:</b> ${calisilanGun} Gün<br>
-<b>Çalışılan Cumartesi:</b> ${cumartesi} Gün<br>
-<b>Çalışılan Pazar:</b> ${pazar} Gün<br>
-<b>Otomatik Mola:</b> ${mola} Saat<br>
-<b>Net Günlük Çalışma:</b> ${netSaat.toFixed(2)} Saat<br>
-<b>Toplam Çalışma:</b> ${toplamSaat.toFixed(2)} Saat<br>
-<b>Normal Çalışma:</b> ${normalSaat.toFixed(2)} Saat<br>
-
-<hr>
-
-<h2>⏱️ Toplam Fazla Mesai: ${fazlaMesai.toFixed(2)} Saat</h2>
+document.getElementById("sonuc2").innerHTML = `
+<b>Toplam Fazla Mesai:</b> ${fazlaMesai.toFixed(2)} Saat
 `;
 }
-}
+
 </script>
 
 </body>
