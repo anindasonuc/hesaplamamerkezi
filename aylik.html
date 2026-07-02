@@ -142,6 +142,40 @@ Net maaş, izin günleri ve fazla mesai saatlerine göre otomatik hesaplama
 <div id="sonuc1"></div>
 
 </div>
+    <div style="height:25px;"></div>
+
+<div class="kutu">
+
+<h1>⏱️ Fazla Mesai Hesaplama</h1>
+
+<div class="aciklama">
+Aylık fazla mesainizi otomatik hesaplayın
+</div>
+
+<label>Ay İçinde Çalışılan Gün</label>
+<input type="number" id="fmGun" placeholder="26">
+
+<label>Çalışılan Cumartesi</label>
+<input type="number" id="fmCumartesi" placeholder="4">
+
+<label>Çalışılan Pazar</label>
+<input type="number" id="fmPazar" placeholder="4">
+
+<label>Günlük Çalışma Saati</label>
+<input type="number" id="fmSaat" placeholder="12">
+
+<label>Hafta İçi Devamsızlık (Gün)</label>
+<input type="number" id="fmDevamsizlik" placeholder="0">
+
+<div class="aciklama">
+<b>Not:</b> Mola otomatik düşülür. Sadece hafta içi devamsızlık günlerini giriniz.
+</div>
+
+<button onclick="fazlaMesaiHesapla()">FAZLA MESAİ HESAPLA</button>
+
+<div id="fmSonuc"></div>
+
+</div>
 
 <script>
 function hesapla(){
@@ -185,6 +219,123 @@ document.getElementById("sonuc1").innerHTML = `
 <hr>
 <h2>Toplam Maaş: ${toplamMaas.toFixed(2)} TL</h2>
 `;
+    function fazlaMesaiHesapla(){
+
+let gun = Number(document.getElementById("fmGun").value) || 0;
+let cumartesi = Number(document.getElementById("fmCumartesi").value) || 0;
+let pazar = Number(document.getElementById("fmPazar").value) || 0;
+let saat = Number(document.getElementById("fmSaat").value) || 0;
+let dev = Number(document.getElementById("fmDevamsizlik").value) || 0;
+
+// Otomatik mola
+let mola = 0;
+
+if(saat > 7.5){
+    mola = 1;
+}else if(saat > 4){
+    mola = 0.5;
+}else{
+    mola = 0.25;
+}
+
+let netSaat = saat - mola;
+
+// Devamsızlık düşülmüş çalışma günü
+let calisilanGun = gun - dev;
+
+if(calisilanGun < 0){
+    calisilanGun = 0;
+}
+
+// Toplam çalışma saati
+let toplamSaat = calisilanGun * netSaat;
+
+// Normal çalışma (7,5 saat)
+let normalSaat = calisilanGun * 7.5;
+
+// Fazla mesai
+let fazlaMesai = toplamSaat - normalSaat;
+
+if(fazlaMesai < 0){
+    fazlaMesai = 0;
+}
+
+document.getElementById("fmSonuc").style.display = "block";
+
+document.getElementById("fmSonuc").innerHTML = `
+<b>📊 Hesaplama Sonucu</b><br><br>
+
+<b>Çalışılan Gün:</b> ${calisilanGun} Gün<br>
+<b>Çalışılan Cumartesi:</b> ${cumartesi} Gün<br>
+<b>Çalışılan Pazar:</b> ${pazar} Gün<br>
+<b>Otomatik Mola:</b> ${mola} Saat<br>
+<b>Net Günlük Çalışma:</b> ${netSaat.toFixed(2)} Saat<br>
+<b>Toplam Çalışma:</b> ${toplamSaat.toFixed(2)} Saat<br>
+<b>Normal Çalışma:</b> ${normalSaat.toFixed(2)} Saat<br>
+
+<hr>
+
+<h2>⏱️ Toplam Fazla Mesai: ${fazlaMesai.toFixed(2)} Saat</h2>
+`;
+}function fazlaMesaiHesapla(){
+
+let gun = Number(document.getElementById("fmGun").value) || 0;
+let cumartesi = Number(document.getElementById("fmCumartesi").value) || 0;
+let pazar = Number(document.getElementById("fmPazar").value) || 0;
+let saat = Number(document.getElementById("fmSaat").value) || 0;
+let dev = Number(document.getElementById("fmDevamsizlik").value) || 0;
+
+// Otomatik mola
+let mola = 0;
+
+if(saat > 7.5){
+    mola = 1;
+}else if(saat > 4){
+    mola = 0.5;
+}else{
+    mola = 0.25;
+}
+
+let netSaat = saat - mola;
+
+// Devamsızlık düşülmüş çalışma günü
+let calisilanGun = gun - dev;
+
+if(calisilanGun < 0){
+    calisilanGun = 0;
+}
+
+// Toplam çalışma saati
+let toplamSaat = calisilanGun * netSaat;
+
+// Normal çalışma (7,5 saat)
+let normalSaat = calisilanGun * 7.5;
+
+// Fazla mesai
+let fazlaMesai = toplamSaat - normalSaat;
+
+if(fazlaMesai < 0){
+    fazlaMesai = 0;
+}
+
+document.getElementById("fmSonuc").style.display = "block";
+
+document.getElementById("fmSonuc").innerHTML = `
+<b>📊 Hesaplama Sonucu</b><br><br>
+
+<b>Çalışılan Gün:</b> ${calisilanGun} Gün<br>
+<b>Çalışılan Cumartesi:</b> ${cumartesi} Gün<br>
+<b>Çalışılan Pazar:</b> ${pazar} Gün<br>
+<b>Otomatik Mola:</b> ${mola} Saat<br>
+<b>Net Günlük Çalışma:</b> ${netSaat.toFixed(2)} Saat<br>
+<b>Toplam Çalışma:</b> ${toplamSaat.toFixed(2)} Saat<br>
+<b>Normal Çalışma:</b> ${normalSaat.toFixed(2)} Saat<br>
+
+<hr>
+
+<h2>⏱️ Toplam Fazla Mesai: ${fazlaMesai.toFixed(2)} Saat</h2>
+`;
+}
 }
 </script>
 
